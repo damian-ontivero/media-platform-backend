@@ -1,0 +1,30 @@
+services:
+  - id: HealthCheckController
+    module: apps.catalog.api.v0.controllers.health_check_controller
+    class: HealthCheckController
+
+  - id: MoviesGetController
+    module: apps.catalog.api.v0.controllers.movies.movies_get_controller
+    class: MoviesGetController
+    arguments:
+      - !ref MovieSearcher
+      - !ref MovieCounter
+
+  - id: MovieGetController
+    module: apps.catalog.api.v0.controllers.movies.movie_get_controller
+    class: MovieGetController
+    arguments:
+      - !ref MovieFinder
+
+  - id: SeriesGetController
+    module: apps.catalog.api.v0.controllers.series.series_get_controller
+    class: SeriesGetController
+    arguments:
+      - !ref SerieSearcher
+      - !ref SerieCounter
+
+  - id: SerieGetController
+    module: apps.catalog.api.v0.controllers.series.serie_get_controller
+    class: SerieGetController
+    arguments:
+      - !ref SerieFinder

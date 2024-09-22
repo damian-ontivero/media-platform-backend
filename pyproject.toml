@@ -1,0 +1,70 @@
+[project]
+name = "media-platform-backend"
+version = "0.1.0"
+description = "This is the backend of the Media Platform"
+authors = [
+    { name = "Damian Ontivero", email = "damian.ontivero.dev@gmail.com" },
+]
+dependencies = [
+    "aio-pika>=9.4.3",
+    "alembic>=1.13.2",
+    "ditainer>=1.2.0",
+    "fastapi[standard]>=0.112.2",
+    "moviepy>=1.0.3",
+    "psycopg2-binary>=2.9.9",
+    "sqlalchemy>=2.0.32",
+]
+requires-python = "==3.12.*"
+readme = "README.md"
+license = { text = "MIT" }
+
+
+[tool.pdm]
+distribution = false
+
+[tool.pdm.build]
+package-dir = "src"
+includes = ["src/apps", "src/contexts"]
+
+[tool.pdm.dev-dependencies]
+dev = ["pre-commit>=3.8.0", "ipdb>=0.13.13"]
+test = [
+    "factory-boy>=3.3.1",
+    "pytest>=8.3.2",
+    "pytest-asyncio>=0.24.0",
+    "pytest-mock>=3.14.0",
+]
+
+[tool.pdm.scripts]
+_ = { env = { PYTHONPATH = "src" } }
+pc-install = { cmd = "pre-commit install" }
+pc-run = { cmd = "pre-commit run --all-files" }
+lint = { cmd = "pre-commit run ruff --all-files" }
+bo-rabbitmq = { call = "scripts.contexts.backoffice.rabbitmq_setup:run", env_file = ".env.backoffice" }
+bo-migrations = { cmd = "alembic -n backoffice upgrade head" }
+bo-tests = { cmd = "pytest tests/contexts/backoffice -vs", env = { MEDIA_STORAGE_PATH = "var/storage-test/media" } }
+bo-api = { cmd = "fastapi run src/apps/backoffice/api/v0/main.py --reload --port 8001", env_file = ".env.backoffice" }
+ca-rabbitmq = { call = "scripts.contexts.catalog.rabbitmq_setup:run", env_file = ".env.catalog" }
+ca-migrations = { cmd = "alembic -n catalog upgrade head" }
+ca-tests = { cmd = "pytest tests/contexts/catalog -vs" }
+ca-api = { cmd = "fastapi run src/apps/catalog/api/v0/main.py --reload --port 8002", env_file = ".env.catalog" }
+
+[tool.ruff]
+src = ["src"]
+line-length = 120
+
+[tool.ruff.format]
+skip-magic-trailing-comma = true
+
+[tool.ruff.lint]
+select = [
+    "F", # Pyflakes
+    "I", # isort
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["src/apps", "src/contexts", "tests/apps", "tests/contexts"]
+force-single-line = true
+lines-between-types = 1
+lines-after-imports = 2
+split-on-trailing-comma = false

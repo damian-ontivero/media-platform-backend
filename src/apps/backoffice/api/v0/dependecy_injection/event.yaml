@@ -1,0 +1,10 @@
+services:
+  - id: EventBus
+    module: contexts.shared.infrastructure.event_bus.rabbitmq.rabbitmq_event_bus
+    class: RabbitMQEventBus
+    arguments:
+      - !tagged domain_event_subscriber
+      - !ref RabbitMQConnection
+      - !ref RabbitMQExchangeFormatter
+      - !ref RabbitMQQueueFormatter
+      - !ref Logger

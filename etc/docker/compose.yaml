@@ -1,0 +1,31 @@
+services:
+  postgres:
+    extends:
+      file: ./postgres/compose.yaml
+      service: postgres
+
+  rabbitmq:
+    extends:
+      file: ./rabbitmq/compose.yaml
+      service: rabbitmq
+
+  backoffice_api_v0:
+    extends:
+      file: ./contexts/backoffice/api/v0/compose.yaml
+      service: backoffice_api_v0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  catalog_api_v0:
+    extends:
+      file: ./contexts/catalog/api/v0/compose.yaml
+      service: catalog_api_v0
+
+networks:
+  postgres:
+    name: postgres
+  rabbitmq:
+    name: rabbitmq

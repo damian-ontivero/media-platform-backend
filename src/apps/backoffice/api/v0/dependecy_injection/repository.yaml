@@ -1,0 +1,18 @@
+services:
+  - id: MediaRepository
+    module: contexts.backoffice.media.infrastructure.persistence.postgres.media_repository
+    class: PostgresMediaRepository
+    arguments:
+      - !ref Database.Session
+
+  - id: MovieRepository
+    module: contexts.backoffice.movies.infrastructure.persistence.postgres.movie_repository
+    class: PostgresMovieRepository
+    arguments:
+      - !ref Database.Session
+
+  - id: SerieRepository
+    module: contexts.backoffice.series.infrastructure.persistence.postgres.serie_repository
+    class: PostgresSerieRepository
+    arguments:
+      - !ref Database.Session

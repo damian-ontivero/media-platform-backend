@@ -1,0 +1,5 @@
+services:
+  - id: Database.Session
+    module: contexts.catalog.shared.infrastructure.persistence.postgres.db
+    class: PostgresSession
+    factory: create_session

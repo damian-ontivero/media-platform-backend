@@ -1,0 +1,78 @@
+services:
+  - id: CommandBus
+    module: contexts.shared.infrastructure.command_bus.in_memory_command_bus
+    class: InMemoryCommandBus
+    arguments:
+      - !tagged command_handler
+
+  - id: MediaCreateCommandHandler
+    module: contexts.backoffice.media.application.commands.media_create_command_handler
+    class: MediaCreateCommandHandler
+    arguments:
+      - !ref MediaCreator
+    tags:
+      - command_handler
+
+  - id: MediaUpdateCommandHandler
+    module: contexts.backoffice.media.application.commands.media_update_command_handler
+    class: MediaUpdateCommandHandler
+    arguments:
+      - !ref MediaUpdater
+    tags:
+      - command_handler
+
+  - id: MediaDeleteCommandHandler
+    module: contexts.backoffice.media.application.commands.media_delete_command_handler
+    class: MediaDeleteCommandHandler
+    arguments:
+      - !ref MediaDeleter
+    tags:
+      - command_handler
+
+  - id: MovieCreateCommandHandler
+    module: contexts.backoffice.movies.application.commands.movie_create_command_handler
+    class: MovieCreateCommandHandler
+    arguments:
+      - !ref MovieCreator
+    tags:
+      - command_handler
+
+  - id: MovieUpdateCommandHandler
+    module: contexts.backoffice.movies.application.commands.movie_update_command_handler
+    class: MovieUpdateCommandHandler
+    arguments:
+      - !ref MovieUpdater
+    tags:
+      - command_handler
+
+  - id: MovieDeleteCommandHandler
+    module: contexts.backoffice.movies.application.commands.movie_delete_command_handler
+    class: MovieDeleteCommandHandler
+    arguments:
+      - !ref MovieDeleter
+    tags:
+      - command_handler
+
+  - id: SerieCreateCommandHandler
+    module: contexts.backoffice.series.application.commands.serie_create_command_handler
+    class: SerieCreateCommandHandler
+    arguments:
+      - !ref SerieCreator
+    tags:
+      - command_handler
+
+  - id: SerieUpdateCommandHandler
+    module: contexts.backoffice.series.application.commands.serie_update_command_handler
+    class: SerieUpdateCommandHandler
+    arguments:
+      - !ref SerieUpdater
+    tags:
+      - command_handler
+
+  - id: SerieDeleteCommandHandler
+    module: contexts.backoffice.series.application.commands.serie_delete_command_handler
+    class: SerieDeleteCommandHandler
+    arguments:
+      - !ref SerieDeleter
+    tags:
+      - command_handler

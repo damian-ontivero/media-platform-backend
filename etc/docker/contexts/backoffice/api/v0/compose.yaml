@@ -1,0 +1,25 @@
+services:
+  backoffice_api_v0:
+    image: backoffice_api_v0
+    build:
+      context: ../../../../../../
+      dockerfile: ./etc/docker/contexts/backoffice/api/v0/Dockerfile
+    container_name: backoffice_api_v0
+    env_file:
+      - path: ../../../../../../.env.backoffice
+    environment:
+      POSTGRES_HOST: postgres
+      RABBITMQ_URI: amqp://admin:admin@rabbitmq:5672/media_platform
+    ports:
+      - "8001:8000"
+    networks:
+      - postgres
+      - rabbitmq
+
+networks:
+  postgres:
+    name: postgres
+    external: true
+  rabbitmq:
+    name: rabbitmq
+    external: true

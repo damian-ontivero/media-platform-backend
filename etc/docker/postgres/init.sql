@@ -1,0 +1,2 @@
+CREATE DATABASE media_platform_backoffice;
+CREATE DATABASE media_platform_catalog;

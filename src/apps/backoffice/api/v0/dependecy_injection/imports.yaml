@@ -1,0 +1,10 @@
+imports:
+  - { resource: ./database.yaml }
+  - { resource: ./repository.yaml }
+  - { resource: ./services.yaml }
+  - { resource: ./command.yaml }
+  - { resource: ./query.yaml }
+  - { resource: ./event.yaml }
+  - { resource: ./rabbitmq.yaml }
+  - { resource: ./controller.yaml }
+  - { resource: ./logger.yaml }

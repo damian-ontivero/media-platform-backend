@@ -1,0 +1,82 @@
+services:
+  - id: EventBus
+    module: contexts.shared.infrastructure.event_bus.rabbitmq.rabbitmq_event_bus
+    class: RabbitMQEventBus
+    arguments:
+      - !tagged domain_event_subscriber
+      - !ref RabbitMQConnection
+      - !ref RabbitMQExchangeFormatter
+      - !ref RabbitMQQueueFormatter
+      - !ref Logger
+
+  - id: CreateMediaOnMediaCreated
+    module: contexts.catalog.media.application.events.subscribers.create_media_on_media_created
+    class: CreateMediaOnMediaCreated
+    arguments:
+      - !ref MediaCreator
+    tags:
+      - domain_event_subscriber
+
+  - id: UpdateMediaOnMediaUpdated
+    module: contexts.catalog.media.application.events.subscribers.update_media_on_media_updated
+    class: UpdateMediaOnMediaUpdated
+    arguments:
+      - !ref MediaUpdater
+    tags:
+      - domain_event_subscriber
+
+  - id: DeleteMediaOnMediaDeleted
+    module: contexts.catalog.media.application.events.subscribers.delete_media_on_media_deleted
+    class: DeleteMediaOnMediaDeleted
+    arguments:
+      - !ref MediaDeleter
+    tags:
+      - domain_event_subscriber
+
+  - id: CreateMovieOnMovieCreated
+    module: contexts.catalog.movies.application.events.subscribers.create_movie_on_movie_created
+    class: CreateMovieOnMovieCreated
+    arguments:
+      - !ref MovieCreator
+    tags:
+      - domain_event_subscriber
+
+  - id: UpdateMovieOnMovieUpdated
+    module: contexts.catalog.movies.application.events.subscribers.update_movie_on_movie_updated
+    class: UpdateMovieOnMovieUpdated
+    arguments:
+      - !ref MovieUpdater
+    tags:
+      - domain_event_subscriber
+
+  - id: DeleteMovieOnMovieDeleted
+    module: contexts.catalog.movies.application.events.subscribers.delete_movie_on_movie_deleted
+    class: DeleteMovieOnMovieDeleted
+    arguments:
+      - !ref MovieDeleter
+    tags:
+      - domain_event_subscriber
+
+  - id: CreateSerieOnSerieCreated
+    module: contexts.catalog.series.application.events.subscribers.create_serie_on_serie_created
+    class: CreateSerieOnSerieCreated
+    arguments:
+      - !ref SerieCreator
+    tags:
+      - domain_event_subscriber
+
+  - id: UpdateSerieOnSerieUpdated
+    module: contexts.catalog.series.application.events.subscribers.update_serie_on_serie_updated
+    class: UpdateSerieOnSerieUpdated
+    arguments:
+      - !ref SerieUpdater
+    tags:
+      - domain_event_subscriber
+
+  - id: DeleteSerieOnSerieDeleted
+    module: contexts.catalog.series.application.events.subscribers.delete_serie_on_serie_deleted
+    class: DeleteSerieOnSerieDeleted
+    arguments:
+      - !ref SerieDeleter
+    tags:
+      - domain_event_subscriber

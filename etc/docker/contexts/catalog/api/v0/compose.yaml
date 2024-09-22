@@ -1,0 +1,25 @@
+services:
+  catalog_api_v0:
+    image: catalog_api_v0
+    build:
+      context: ../../../../../../
+      dockerfile: ./etc/docker/contexts/catalog/api/v0/Dockerfile
+    container_name: catalog_api_v0
+    env_file:
+      - path: ../../../../../../.env.catalog
+    environment:
+      POSTGRES_HOST: postgres
+      RABBITMQ_URI: amqp://admin:admin@rabbitmq:5672/media_platform
+    ports:
+      - "8002:8000"
+    networks:
+      - postgres
+      - rabbitmq
+
+networks:
+  postgres:
+    name: postgres
+    external: true
+  rabbitmq:
+    name: rabbitmq
+    external: true

@@ -1,0 +1,121 @@
+services:
+  - id: MediaSearcher
+    module: contexts.backoffice.media.application.services.media_searcher
+    class: MediaSearcher
+    arguments:
+      - !ref MediaRepository
+
+  - id: MediaFinder
+    module: contexts.backoffice.media.application.services.media_finder
+    class: MediaFinder
+    arguments:
+      - !ref MediaRepository
+
+  - id: MediaCounter
+    module: contexts.backoffice.media.application.services.media_counter
+    class: MediaCounter
+    arguments:
+      - !ref MediaRepository
+
+  - id: MediaCreator
+    module: contexts.backoffice.media.application.services.media_creator
+    class: MediaCreator
+    arguments:
+      - !ref MediaRepository
+      - !ref EventBus
+
+  - id: MediaUpdater
+    module: contexts.backoffice.media.application.services.media_updater
+    class: MediaUpdater
+    arguments:
+      - !ref MediaRepository
+      - !ref EventBus
+
+  - id: MediaDeleter
+    module: contexts.backoffice.media.application.services.media_deleter
+    class: MediaDeleter
+    arguments:
+      - !ref MediaRepository
+      - !ref EventBus
+
+  - id: MovieSearcher
+    module: contexts.backoffice.movies.application.services.movie_searcher
+    class: MovieSearcher
+    arguments:
+      - !ref MovieRepository
+
+  - id: MovieFinder
+    module: contexts.backoffice.movies.application.services.movie_finder
+    class: MovieFinder
+    arguments:
+      - !ref MovieRepository
+
+  - id: MovieCounter
+    module: contexts.backoffice.movies.application.services.movie_counter
+    class: MovieCounter
+    arguments:
+      - !ref MovieRepository
+
+  - id: MovieCreator
+    module: contexts.backoffice.movies.application.services.movie_creator
+    class: MovieCreator
+    arguments:
+      - !ref MovieRepository
+      - !ref QueryBus
+      - !ref EventBus
+
+  - id: MovieUpdater
+    module: contexts.backoffice.movies.application.services.movie_updater
+    class: MovieUpdater
+    arguments:
+      - !ref MovieRepository
+      - !ref QueryBus
+      - !ref EventBus
+
+  - id: MovieDeleter
+    module: contexts.backoffice.movies.application.services.movie_deleter
+    class: MovieDeleter
+    arguments:
+      - !ref MovieRepository
+      - !ref EventBus
+
+  - id: SerieSearcher
+    module: contexts.backoffice.series.application.services.serie_searcher
+    class: SerieSearcher
+    arguments:
+      - !ref SerieRepository
+
+  - id: SerieFinder
+    module: contexts.backoffice.series.application.services.serie_finder
+    class: SerieFinder
+    arguments:
+      - !ref SerieRepository
+
+  - id: SerieCounter
+    module: contexts.backoffice.series.application.services.serie_counter
+    class: SerieCounter
+    arguments:
+      - !ref SerieRepository
+
+  - id: SerieCreator
+    module: contexts.backoffice.series.application.services.serie_creator
+    class: SerieCreator
+    arguments:
+      - !ref SerieRepository
+      - !ref QueryBus
+      - !ref EventBus
+
+  - id: SerieUpdater
+    module: contexts.backoffice.series.application.services.serie_updater
+    class: SerieUpdater
+    arguments:
+      - !ref SerieRepository
+      - !ref QueryBus
+      - !ref EventBus
+
+  - id: SerieDeleter
+    module: contexts.backoffice.series.application.services.serie_deleter
+    class: SerieDeleter
+    arguments:
+      - !ref SerieRepository
+      - !ref EventBus

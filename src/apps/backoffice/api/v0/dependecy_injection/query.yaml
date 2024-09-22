@@ -1,0 +1,78 @@
+services:
+  - id: QueryBus
+    module: contexts.shared.infrastructure.query_bus.in_memory_query_bus
+    class: InMemoryQueryBus
+    arguments:
+      - !tagged query_handler
+
+  - id: MediaSearchByCriteriaQueryHandler
+    module: contexts.backoffice.media.application.queries.media_search_by_criteria_query_handler
+    class: MediaSearchByCriteriaQueryHandler
+    arguments:
+      - !ref MediaSearcher
+    tags:
+      - query_handler
+
+  - id: MediaFindByIdQueryHandler
+    module: contexts.backoffice.media.application.queries.media_find_by_id_query_handler
+    class: MediaFindByIdQueryHandler
+    arguments:
+      - !ref MediaFinder
+    tags:
+      - query_handler
+
+  - id: MediaCountQueryHandler
+    module: contexts.backoffice.media.application.queries.media_count_query_handler
+    class: MediaCountQueryHandler
+    arguments:
+      - !ref MediaCounter
+    tags:
+      - query_handler
+
+  - id: MovieSearchByCriteriaQueryHandler
+    module: contexts.backoffice.movies.application.queries.movie_search_by_criteria_query_handler
+    class: MovieSearchByCriteriaQueryHandler
+    arguments:
+      - !ref MovieSearcher
+    tags:
+      - query_handler
+
+  - id: MovieFindByIdQueryHandler
+    module: contexts.backoffice.movies.application.queries.movie_find_by_id_query_handler
+    class: MovieFindByIdQueryHandler
+    arguments:
+      - !ref MovieFinder
+    tags:
+      - query_handler
+
+  - id: MovieCountQueryHandler
+    module: contexts.backoffice.movies.application.queries.movie_count_query_handler
+    class: MovieCountQueryHandler
+    arguments:
+      - !ref MovieCounter
+    tags:
+      - query_handler
+
+  - id: SerieSearchByCriteriaQueryHandler
+    module: contexts.backoffice.series.application.queries.serie_search_by_criteria_query_handler
+    class: SerieSearchByCriteriaQueryHandler
+    arguments:
+      - !ref SerieSearcher
+    tags:
+      - query_handler
+
+  - id: SerieFindByIdQueryHandler
+    module: contexts.backoffice.series.application.queries.serie_find_by_id_query_handler
+    class: SerieFindByIdQueryHandler
+    arguments:
+      - !ref SerieFinder
+    tags:
+      - query_handler
+
+  - id: SerieCountQueryHandler
+    module: contexts.backoffice.series.application.queries.serie_count_query_handler
+    class: SerieCountQueryHandler
+    arguments:
+      - !ref SerieCounter
+    tags:
+      - query_handler
